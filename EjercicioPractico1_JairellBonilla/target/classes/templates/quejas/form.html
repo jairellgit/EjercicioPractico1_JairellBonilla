@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout::page(~{::section})}">
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Enviar queja / sugerencia</h2>
+    <a th:href="@{/quejas}" class="btn btn-outline-secondary">Volver</a>
+  </div>
+
+  <form th:action="@{/quejas/guardar}" th:object="${queja}" method="post" class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nombre</label>
+        <input type="text" class="form-control" th:field="*{nombreCliente}" required>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Email</label>
+        <input type="email" class="form-control" th:field="*{email}">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Teléfono</label>
+        <input type="text" class="form-control" th:field="*{telefono}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>Tipo</label>
+        <select class="form-control" th:field="*{tipo}">
+          <option th:each="t : ${tipos}" th:value="${t}" th:text="${t}"></option>
+        </select>
+      </div>
+      <div class="form-group col-md-9">
+        <label>Asunto</label>
+        <input type="text" class="form-control" th:field="*{asunto}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Mensaje</label>
+      <textarea rows="4" class="form-control" th:field="*{mensaje}" required></textarea>
+    </div>
+
+    <div class="text-right">
+      <button class="btn btn-primary">Enviar</button>
+    </div>
+  </form>
+</section>
+</html>
